@@ -6,14 +6,17 @@ import { criaUsuarioDTO } from "./dto/usuario.dto";
 import {v4 as uuid} from 'uuid';// importante que seja colocado o import dessa forma sempre
 import { ListaUsuarioDTO } from "./dto/consulta.dto";
 import { alteraUsuarioDTO } from "./dto/alteraUsuario.dto";
+import { ApiBadRequestResponse, ApiResponse, ApiTags } from "@nestjs/swagger";
 
-
+@ApiTags('Usuario')
 @Controller('/usuarios')
 export class UsuarioController{
     constructor(private clsUsuariosArmazenados: UsuariosArmazenados){
         
     }    
     @Post()
+    @ApiResponse({status: 201, description: 'Retorna que houve sucesso ao criar o usuario'})
+    @ApiBadRequestResponse({description: 'Retorna que houve erro ao criar o usuario'})
     async criaUsuario(@Body() dadosUsuario: criaUsuarioDTO){
         
          

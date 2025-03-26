@@ -18,11 +18,16 @@ export class UsuariosArmazenados{
         const usuario = this.buscaPorID(id);
         Object.entries(dadosAtualizacao).forEach(
             ([chave, valor]) => {
+                if (valor !== undefined){
+                    return}
                 if(chave === 'id'){
                     return
                 }
-                if (valor !== undefined){
-                    return}
+                else if(chave === 'senha'){
+                    usuario.trocarSenha(valor);
+                    return
+                }
+
                     
                 usuario[chave] = valor;
             }
